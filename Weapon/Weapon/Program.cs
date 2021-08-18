@@ -18,7 +18,7 @@ namespace Weapon
         public void Fire(Player player)
         {
             if(_bullets <= 0)
-                throw new ArgumentOutOfRangeException("В обойме недостаточно пуль");
+                throw new Exception("В обойме недостаточно пуль");
 
             player.TakeDamage(_damage);
             _bullets -= 1;
@@ -29,6 +29,8 @@ namespace Weapon
     {
         private int _health;
 
+        public event Action Died;
+
         public void TakeDamage(int damage)
         {
             if(damage < 0)
@@ -37,12 +39,7 @@ namespace Weapon
             _health -= damage;
 
             if(_health <= 0)
-                Die();
-        }
-
-        private void Die()
-        {
-
+                Died?.Invoke();
         }
     }
 
