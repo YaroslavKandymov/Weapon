@@ -19,8 +19,7 @@ namespace Weapon
         {
             if (_bullets <= 0)
             {
-                throw new Exception("В обойме недостаточно пуль");
-                return;
+                throw new InvalidOperationException("В обойме недостаточно пуль");
             }
 
             player.TakeDamage(_damage);
@@ -38,14 +37,12 @@ namespace Weapon
         {
             if (_health < 0)
             {
-                throw new Exception("Игрок уже мертв");
-                return;
+                throw new InvalidOperationException("Игрок уже мертв");
             }
 
             if (damage < 0)
             {
-                throw new Exception("Не правильное значение урона");
-                return;
+                throw new InvalidOperationException("Не правильное значение урона");
             }
 
             _health -= damage;
